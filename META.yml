@@ -1,0 +1,53 @@
+---
+abstract: 'Object and class methods for working with British postcodes.'
+author:
+  - 'Michael Jemmeson <mjemmeson@cpan.org>'
+build_requires:
+  Clone: 0
+  Data::Dumper::Concise: 0
+  ExtUtils::MakeMaker: 0
+  File::Find: 0
+  File::Spec::Functions: 0
+  File::Temp: 0
+  List::Util: 0
+  Test::More: 0
+  Test::Most: 0
+configure_requires:
+  ExtUtils::MakeMaker: 6.30
+  File::ShareDir::Install: 0.03
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.130880'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Geo-UK-Postcode
+no_index:
+  directory:
+    - t
+    - xt
+    - examples
+    - corpus
+  package:
+    - DB
+provides:
+  Geo::UK::Postcode:
+    file: lib/Geo/UK/Postcode.pm
+    version: 0.001
+  Geo::UK::Postcode::Regex:
+    file: lib/Geo/UK/Postcode/Regex.pm
+    version: 0.001
+requires:
+  Exporter: 0
+  Moo: 0
+  MooX::Aliases: 0
+  base: 0
+  overload: 0
+  perl: 5.010
+  strict: 0
+  warnings: 0
+resources:
+  bugtracker: https://github.com/mjemmeson/geo-uk-postcode/issues
+  homepage: https://metacpan.org/release/Geo-UK-Postcode
+  repository: git://github.com/mjemmeson/geo-uk-postcode.git
+version: 0.001

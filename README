@@ -1,0 +1,144 @@
+NAME
+    Geo::UK::Postcode - Object and class methods for working with British
+    postcodes.
+
+VERSION
+    version 0.001
+
+SYNOPSIS
+      use Geo::UK::Postcode;
+  
+      my $pc = Geo::UK::Postcode->new( "WC1H 9EB" );
+  
+      $pc->area;           # WC
+      $pc->district;       # 1
+      $pc->subdistrict;    # H
+      $pc->sector;         # 9
+      $pc->unit;           # EB
+  
+      $pc->outcode;        # WC1H
+      $pc->incode;         # 9EB
+  
+      "$pc";               # stringifies to: WC1H 9EB
+      $pc->fixed_format;   # 8 characters, the incode always last three
+
+      $pc->strict;     # true if matches strict regex
+      $pc->valid;      # true if matches strict regex and has a valid outcode
+      $pc->partial;    # true if postcode is for a district or sector only
+
+      # Sort Postcode objects:
+      use Geo::UK::Postcode qw/ pc_sort /;
+  
+      my @sorted_pcs = sort pc_sort @unsorted_pcs;
+
+DESCRIPTION
+    An attempt to make a useful package for dealing with UK Postcodes.
+
+    See Geo::UK::Postcode::Regex for matching and parsing postcodes.
+
+    Currently in development - feedback welcome.
+
+    See Geo::UK::Postcode::Regex for more postcode parsing.
+
+METHODS
+  as_string
+      $pc->as_string;
+
+      # or:
+
+      "$pc";
+
+    Stringification of postcode object, returns postcode with a single space
+    between outcode and incode.
+
+  fixed_format
+        my $fixed_format = $postcode->fixed_format;
+
+    Returns the full postcode in a fixed length (8 character) format, with
+    extra padding spaces inserted as necessary.
+
+  area, district, subdistrict, sector, unit
+    Return the corresponding part of the postcode, undef if not present.
+
+  outcode
+    The first half of the postcode, before the space - comprises of the area
+    and district.
+
+  incode
+    The second half of the postcode, after the space - comprises of the
+    sector and unit. Returns an empty string if not present.
+
+  outward, inward
+    Aliases for "outcode" and "incode".
+
+  valid
+      if ($pc->valid) {
+        ...
+      }
+
+    Returns true if postcode has valid outcode and matches strict regex.
+
+  partial
+      if ($pc->partial) {
+        ...
+      }
+
+    Returns true if postcode is not a full postcode, either a postcode
+    district ( e . g . AB10 ) or postcode sector (e.g. AB10 1).
+
+  strict
+      if ($pc->strict) {
+        ...
+      }
+
+    Returns true if postcode matches strict regex, meaning all characters
+    are valid ( although postcode might not exist ) .
+
+  posttowns
+        my (@posttowns) = $postcode->posttowns;
+
+    Returns list of one or more posttowns that this postcode is assigned to.
+
+EXPORTABLE
+  pc_sort
+        my @sorted_pcs = sort pc_sort @unsorted_pcs;
+
+    Exportable sort function, sorts postcode objects
+
+SEE ALSO
+    Geo::Address::Mail::UK
+    Geo::Postcode
+    Data::Validation::Constraints::Postcode
+    CGI::Untaint::uk_postcode
+    Form::Validator::UKPostcode
+
+TODO
+    Finalise API
+    Handle non-geographic postcodes
+    Handle British overseas territories
+    Handle special case postcodes, like GIR 0AA and SAN TA1
+
+SUPPORT
+  Bugs / Feature Requests
+    Please report any bugs or feature requests through the issue tracker at
+    <https://github.com/mjemmeson/geo-uk-postcode/issues>. You will be
+    notified automatically of any progress on your issue.
+
+  Source Code
+    This is open source software. The code repository is available for
+    public review and contribution under the terms of the license.
+
+    <https://github.com/mjemmeson/geo-uk-postcode>
+
+      git clone git://github.com/mjemmeson/geo-uk-postcode.git
+
+AUTHOR
+    Michael Jemmeson <mjemmeson@cpan.org>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2013 by Michael Jemmeson
+    <mjemmeson@cpan.org>.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
