@@ -16,7 +16,7 @@ configure_requires:
   ExtUtils::MakeMaker: 6.30
   File::ShareDir::Install: 0.03
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.130880'
+generated_by: 'Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -33,10 +33,10 @@ no_index:
 provides:
   Geo::UK::Postcode:
     file: lib/Geo/UK/Postcode.pm
-    version: 0.001
+    version: 0.002
   Geo::UK::Postcode::Regex:
     file: lib/Geo/UK/Postcode/Regex.pm
-    version: 0.001
+    version: 0.002
 requires:
   Exporter: 0
   Moo: 0
@@ -50,4 +50,4 @@ resources:
   bugtracker: https://github.com/mjemmeson/geo-uk-postcode/issues
   homepage: https://metacpan.org/release/Geo-UK-Postcode
   repository: git://github.com/mjemmeson/geo-uk-postcode.git
-version: 0.001
+version: 0.002

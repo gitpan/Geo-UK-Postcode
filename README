@@ -3,7 +3,7 @@ NAME
     postcodes.
 
 VERSION
-    version 0.001
+    version 0.002
 
 SYNOPSIS
       use Geo::UK::Postcode;
@@ -25,6 +25,9 @@ SYNOPSIS
       $pc->strict;     # true if matches strict regex
       $pc->valid;      # true if matches strict regex and has a valid outcode
       $pc->partial;    # true if postcode is for a district or sector only
+
+      $pc->non_geographical;    # true if outcode is known to be
+                                # non-geographical
 
       # Sort Postcode objects:
       use Geo::UK::Postcode qw/ pc_sort /;
@@ -94,6 +97,17 @@ METHODS
     Returns true if postcode matches strict regex, meaning all characters
     are valid ( although postcode might not exist ) .
 
+  non_geographical
+        if ($pc->non_geographical) {
+          ...
+        }
+
+    Returns true if the outcode is known to be non-geographical. Note that
+    geographical outcodes may have non-geographical postcodes within them.
+
+    (Non-geographical postcodes are used for PO Boxes, or organisations
+    receiving large amounts of post).
+
   posttowns
         my (@posttowns) = $postcode->posttowns;
 
@@ -106,17 +120,22 @@ EXPORTABLE
     Exportable sort function, sorts postcode objects
 
 SEE ALSO
-    Geo::Address::Mail::UK
-    Geo::Postcode
-    Data::Validation::Constraints::Postcode
-    CGI::Untaint::uk_postcode
-    Form::Validator::UKPostcode
+    *   Geo::Address::Mail::UK
+
+    *   Geo::Postcode
+
+    *   Data::Validation::Constraints::Postcode
+
+    *   CGI::Untaint::uk_postcode
+
+    *   Form::Validator::UKPostcode
 
 TODO
     Finalise API
     Handle non-geographic postcodes
     Handle British overseas territories
     Handle special case postcodes, like GIR 0AA and SAN TA1
+    Find out which BX non-geographical districts are used.
 
 SUPPORT
   Bugs / Feature Requests
