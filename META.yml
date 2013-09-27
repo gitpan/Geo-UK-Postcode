@@ -33,10 +33,10 @@ no_index:
 provides:
   Geo::UK::Postcode:
     file: lib/Geo/UK/Postcode.pm
-    version: 0.002
+    version: 0.003
   Geo::UK::Postcode::Regex:
     file: lib/Geo/UK/Postcode/Regex.pm
-    version: 0.002
+    version: 0.003
 requires:
   Exporter: 0
   Moo: 0
@@ -50,4 +50,6 @@ resources:
   bugtracker: https://github.com/mjemmeson/geo-uk-postcode/issues
   homepage: https://metacpan.org/release/Geo-UK-Postcode
   repository: git://github.com/mjemmeson/geo-uk-postcode.git
-version: 0.002
+version: 0.003
+x_contributors:
+  - 'Michael Jemmeson <michael.jemmeson@cpan.org>'

@@ -5,35 +5,42 @@ use warnings;
 
 # ABSTRACT: regular expressions for handling British postcodes
 
-our $VERSION = '0.002'; # VERSION
+our $VERSION = '0.003'; # VERSION
 
 
 ## REGULAR EXPRESSIONS
 
-my $AREA1       = 'ABCDEFGHIJKLMNOPRSTUWYZ';    # [^QVX]
-my $AREA2       = 'ABCDEFGHKLMNOPQRSTUVWXY';    # [^IJZ]
-my $SUBDISTRICT = 'ABCDEFGHJKMNPRSTUVWXY';      # [^ILOQ]
-my $UNIT1       = 'ABDEFGHJKSTUW';              #
-my $UNIT2       = 'ABDEFGHJLNPQRSTUWXYZ';
+my $AREA1 = 'ABCDEFGHIJKLMNOPRSTUWYZ';    # [^QVX]
+my $AREA2 = 'ABCDEFGHKLMNOPQRSTUVWXY';    # [^IJZ]
+
+my $SUBDISTRICT1 = 'ABCDEFGHJKSTUW';      # for single letter areas
+my $SUBDISTRICT2 = 'ABEHMNPRVWXY';        # for two letter areas
+
+my $UNIT1 = 'ABDEFGHJLNPQRSTUWXYZ';       # [^CIKMOV]
+my $UNIT2 = 'ABDEFGHJLNPQRSTUWXYZ';       # [^CIKMOV]
 
 my %COMPONENTS = (
     strict => {
-        area     => qr/[$AREA1][$AREA2]?/,
-        district => qr/[0-9](?:[0-9]|[$SUBDISTRICT])?/,
-        sector   => qr/[0-9]/,
-        unit     => qr/[$UNIT1][$UNIT2]/,
+        area     => qr/([$AREA1][$AREA2]?)/,
+        district => qr/(
+           (?: (?<![A-Z]{2}) [0-9]       [$SUBDISTRICT1]? ) |
+           (?: (?<=[A-Z]{2}) [0-9]       [$SUBDISTRICT2]  ) |
+                             [0-9][0-9]?
+        )/x,
+        sector => qr/([0-9])/,
+        unit   => qr/([$UNIT1][$UNIT2])/,
     },
     loose => {
-        area     => qr/[A-Z]{1,2}/,
-        district => qr/[0-9](?:[0-9]|[A-Z])?/,
-        sector   => qr/[0-9]/,
-        unit     => qr/[A-Z]{2}/,
+        area     => qr/([A-Z]{1,2})/,
+        district => qr/([0-9](?:[0-9]|[A-Z])?)/,
+        sector   => qr/([0-9])/,
+        unit     => qr/([A-Z]{2})/,
     },
 );
 
 my %base_regexes = (
-    full    => '^ (%s) (%s) \s*     (%s) (%s)       $',
-    partial => '^ (%s) (%s) \s* (?: (%s) (%s) ? ) ? $',
+    full    => '^ %s %s \s*     %s %s       $',
+    partial => '^ %s %s \s* (?: %s %s ? ) ? $',
 );
 
 my %REGEXES;
@@ -141,6 +148,7 @@ sub parse {
         strict        => $strict,
         partial       => $unit ? 0 : 1,
         $outcode->{non_geographical} ? ( non_geographical => 1 ) : (),
+        "$area$district" eq "BF1"    ? ( bfpo             => 1 ) : (),
     };
 }
 
@@ -184,7 +192,7 @@ Geo::UK::Postcode::Regex - regular expressions for handling British postcodes
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -198,12 +206,17 @@ version 0.002
   ## PARSING
   my $parsed = Geo::UK::Postcode::Regex->parse( "WC1H 9EB" );
   # returns:
-  #   { area        => 'WC',
-  #     district    => '1',
-  #     subdistrict => 'H',
-  #     sector      => '9',
-  #     unit        => 'EB',
-  #   }
+  # {   area             => 'WC',
+  #     district         => '1',
+  #     subdistrict      => 'H',
+  #     sector           => '9',
+  #     unit             => 'EB',
+  #     valid_outcode    => 1 | 0,
+  #     strict           => 1 | 0,
+  #     partial          => 1 | 0,
+  #     non_geographical => 1 | 0,
+  #     bfpo             => 1 | 0,
+  # }
   
   # strict parsing (only valid characters):
   ...->parse( $pc, { strict => 1 } )
@@ -322,6 +335,10 @@ Hashref of posttown to outcode(s);
 =head1 AUTHOR
 
 Michael Jemmeson <mjemmeson@cpan.org>
+
+=head1 CONTRIBUTOR
+
+Michael Jemmeson <michael.jemmeson@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

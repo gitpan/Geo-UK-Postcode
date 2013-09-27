@@ -140,23 +140,51 @@ my %tests = (
         valid_outcode    => 1,
         non_geographical => 1,
     },
+    'SE1' => {
+        area          => 'SE',
+        district      => '1',
+        partial       => 1,
+        subdistrict   => undef,
+        sector        => undef,
+        unit          => undef,
+        strict        => 1,
+        valid_outcode => 1,
+    },
+    'BF1 1AA' => {
+        area             => 'BF',
+        district         => '1',
+        partial          => 0,
+        subdistrict      => undef,
+        sector           => 1,
+        unit             => 'AA',
+        strict           => 1,
+        valid_outcode    => 1,
+        non_geographical => 1,
+        bfpo             => 1,
+        },
 );
 
 note "parse";
-
 test_parse( \%tests );
 
 note "parse - strict";
-
 test_parse( \%tests, { strict => 1 } );
 
 note "parse - valid";
-
 test_parse( \%tests, { valid => 1 } );
 
 note "parse - partial";
-
 test_parse( \%tests, { partial => 1 } );
+
+note "combinations - strict and valid";
+test_parse( \%tests, { strict => 1, valid => 1 } );
+
+note "combinations - strict and partial";
+test_parse( \%tests, { strict => 1, partial => 1 } );
+
+note "combinations - valid and partial";
+test_parse( \%tests, { valid => 1, partial => 1 } );
+
 
 sub msg {
     my ( $pc, $expected ) = @_;

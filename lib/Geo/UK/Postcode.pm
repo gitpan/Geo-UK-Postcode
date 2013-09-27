@@ -10,7 +10,7 @@ use overload '""' => "as_string";
 
 # ABSTRACT: Object and class methods for working with British postcodes.
 
-our $VERSION = '0.002'; # VERSION
+our $VERSION = '0.003'; # VERSION
 
 our @EXPORT_OK = qw/ pc_sort /;
 
@@ -93,6 +93,11 @@ sub non_geographical {
 }
 
 
+sub bfpo {
+    $_[0]->outcode eq 'BF1' ? 1 : 0;
+}
+
+
 sub posttowns { Geo::UK::Postcode::Regex->posttowns( $_[0]->outcode ) }
 
 
@@ -118,13 +123,18 @@ Geo::UK::Postcode - Object and class methods for working with British postcodes.
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
   use Geo::UK::Postcode;
   
-  my $pc = Geo::UK::Postcode->new( "WC1H 9EB" );
+  my $pc = Geo::UK::Postcode->new( "wc1h9eb" );
+  
+  $pc->raw;            # wc1h9eb - as entered
+  $pc->as_string;      # WC1H 9EB - output in correct format
+  "$pc";               # stringifies, same output as '->as_string'
+  $pc->fixed_format;   # 8 characters, the incode always last three
   
   $pc->area;           # WC
   $pc->district;       # 1
@@ -135,9 +145,6 @@ version 0.002
   $pc->outcode;        # WC1H
   $pc->incode;         # 9EB
   
-  "$pc";               # stringifies to: WC1H 9EB
-  $pc->fixed_format;   # 8 characters, the incode always last three
-
   $pc->strict;     # true if matches strict regex
   $pc->valid;      # true if matches strict regex and has a valid outcode
   $pc->partial;    # true if postcode is for a district or sector only
@@ -152,17 +159,23 @@ version 0.002
 
 =head1 DESCRIPTION
 
-An attempt to make a useful package for dealing with UK Postcodes.
+An object to represent a British postcode.
 
-See L<Geo::UK::Postcode::Regex> for matching and parsing postcodes.
+For geo-location (finding latitude and longitude) see L</"GEO-LOCATING POSTCODES">.
 
-Currently in development - feedback welcome.
+For matching and parsing postcodes in a non-OO manner (for form
+validation, for example), see L<Geo::UK::Postcode::Regex>
 
-See L<Geo::UK::Postcode::Regex> for more postcode parsing.
+Currently undef development - feedback welcome. Basic API unlikely to change,
+just more features/more postcodes supported - see L</TODO> list.
 
 =for Pod::Coverage BUILDARGS BUILD
 
 =head1 METHODS
+
+=head2 raw
+
+Returns exact string that object was constructed from.
 
 =head2 as_string
 
@@ -239,6 +252,12 @@ geographical outcodes may have non-geographical postcodes within them.
 (Non-geographical postcodes are used for PO Boxes, or organisations
 receiving large amounts of post).
 
+=head2 bfpo
+
+    if ($pc->bfpo) {
+        ...
+    }
+
 =head2 posttowns
 
     my (@posttowns) = $postcode->posttowns;
@@ -251,7 +270,17 @@ Returns list of one or more posttowns that this postcode is assigned to.
 
     my @sorted_pcs = sort pc_sort @unsorted_pcs;
 
-Exportable sort function, sorts postcode objects
+Exportable sort function, sorts postcode objects in a useful manner. The
+sort is in the following order: area, district, subdistrict, sector, unit
+(ascending alphabetical or numerical order as appropriate).
+
+=head1 GEO-LOCATING POSTCODES
+
+Postcodes can be geolocated by obtaining the Ordnance Survey 'Code-Point' data
+(or the free 'Code-Point Open' data).
+
+For full details of using this class with Code-Point data, see:
+L<Geo::UK::Postcode::Manual::Geolocation>.
 
 =head1 SEE ALSO
 
@@ -293,6 +322,10 @@ L<Form::Validator::UKPostcode>
 
 =item Find out which BX non-geographical districts are used.
 
+=item handle BFPO
+
+=item cleanup method to correct common errors
+
 =back
 
 =for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders metacpan
@@ -317,6 +350,10 @@ L<https://github.com/mjemmeson/geo-uk-postcode>
 =head1 AUTHOR
 
 Michael Jemmeson <mjemmeson@cpan.org>
+
+=head1 CONTRIBUTOR
+
+Michael Jemmeson <michael.jemmeson@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

@@ -3,12 +3,17 @@ NAME
     postcodes.
 
 VERSION
-    version 0.002
+    version 0.003
 
 SYNOPSIS
       use Geo::UK::Postcode;
   
-      my $pc = Geo::UK::Postcode->new( "WC1H 9EB" );
+      my $pc = Geo::UK::Postcode->new( "wc1h9eb" );
+  
+      $pc->raw;            # wc1h9eb - as entered
+      $pc->as_string;      # WC1H 9EB - output in correct format
+      "$pc";               # stringifies, same output as '->as_string'
+      $pc->fixed_format;   # 8 characters, the incode always last three
   
       $pc->area;           # WC
       $pc->district;       # 1
@@ -19,9 +24,6 @@ SYNOPSIS
       $pc->outcode;        # WC1H
       $pc->incode;         # 9EB
   
-      "$pc";               # stringifies to: WC1H 9EB
-      $pc->fixed_format;   # 8 characters, the incode always last three
-
       $pc->strict;     # true if matches strict regex
       $pc->valid;      # true if matches strict regex and has a valid outcode
       $pc->partial;    # true if postcode is for a district or sector only
@@ -35,15 +37,21 @@ SYNOPSIS
       my @sorted_pcs = sort pc_sort @unsorted_pcs;
 
 DESCRIPTION
-    An attempt to make a useful package for dealing with UK Postcodes.
+    An object to represent a British postcode.
 
-    See Geo::UK::Postcode::Regex for matching and parsing postcodes.
+    For geo-location (finding latitude and longitude) see "GEO-LOCATING
+    POSTCODES".
 
-    Currently in development - feedback welcome.
+    For matching and parsing postcodes in a non-OO manner (for form
+    validation, for example), see Geo::UK::Postcode::Regex
 
-    See Geo::UK::Postcode::Regex for more postcode parsing.
+    Currently undef development - feedback welcome. Basic API unlikely to
+    change, just more features/more postcodes supported - see "TODO" list.
 
 METHODS
+  raw
+    Returns exact string that object was constructed from.
+
   as_string
       $pc->as_string;
 
@@ -108,6 +116,11 @@ METHODS
     (Non-geographical postcodes are used for PO Boxes, or organisations
     receiving large amounts of post).
 
+  bfpo
+        if ($pc->bfpo) {
+            ...
+        }
+
   posttowns
         my (@posttowns) = $postcode->posttowns;
 
@@ -117,7 +130,16 @@ EXPORTABLE
   pc_sort
         my @sorted_pcs = sort pc_sort @unsorted_pcs;
 
-    Exportable sort function, sorts postcode objects
+    Exportable sort function, sorts postcode objects in a useful manner. The
+    sort is in the following order: area, district, subdistrict, sector,
+    unit (ascending alphabetical or numerical order as appropriate).
+
+GEO-LOCATING POSTCODES
+    Postcodes can be geolocated by obtaining the Ordnance Survey
+    'Code-Point' data (or the free 'Code-Point Open' data).
+
+    For full details of using this class with Code-Point data, see:
+    Geo::UK::Postcode::Manual::Geolocation.
 
 SEE ALSO
     *   Geo::Address::Mail::UK
@@ -136,6 +158,8 @@ TODO
     Handle British overseas territories
     Handle special case postcodes, like GIR 0AA and SAN TA1
     Find out which BX non-geographical districts are used.
+    handle BFPO
+    cleanup method to correct common errors
 
 SUPPORT
   Bugs / Feature Requests
@@ -153,6 +177,9 @@ SUPPORT
 
 AUTHOR
     Michael Jemmeson <mjemmeson@cpan.org>
+
+CONTRIBUTOR
+    Michael Jemmeson <michael.jemmeson@cpan.org>
 
 COPYRIGHT AND LICENSE
     This software is copyright (c) 2013 by Michael Jemmeson

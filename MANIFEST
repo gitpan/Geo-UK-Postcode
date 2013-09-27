@@ -18,10 +18,10 @@ t/postcode.t
 t/posttown.t
 t/regex.t
 t/sort.t
+xt/author/valid_geographical.t
 xt/release/distmeta.t
 xt/release/minimum-version.t
 xt/release/pod-coverage.t
 xt/release/pod-syntax.t
 xt/release/portability.t
 xt/release/test-version.t
-xt/valid_geographical.t
