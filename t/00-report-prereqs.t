@@ -24,6 +24,7 @@ my @modules = qw(
   Test::More
   Test::Most
   base
+  lib
   overload
   perl
   strict

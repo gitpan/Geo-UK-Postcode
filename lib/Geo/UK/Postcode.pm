@@ -10,7 +10,7 @@ use overload '""' => "as_string";
 
 # ABSTRACT: Object and class methods for working with British postcodes.
 
-our $VERSION = '0.003'; # VERSION
+our $VERSION = '0.004'; # VERSION
 
 our @EXPORT_OK = qw/ pc_sort /;
 
@@ -123,7 +123,7 @@ Geo::UK::Postcode - Object and class methods for working with British postcodes.
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 

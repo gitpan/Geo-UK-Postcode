@@ -13,6 +13,7 @@ share/get_pc_districts.pl
 t/00-compile.t
 t/00-report-prereqs.t
 t/lib/TestGeoUKPostcode.pm
+t/outcode.t
 t/parse.t
 t/postcode.t
 t/posttown.t
