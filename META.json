@@ -27,8 +27,7 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.30",
-            "File::ShareDir::Install" : "0.03"
+            "ExtUtils::MakeMaker" : "6.17"
          }
       },
       "develop" : {
@@ -45,55 +44,50 @@
       "runtime" : {
          "requires" : {
             "Exporter" : "0",
+            "Geo::UK::Postcode::Regex" : "0",
             "Moo" : "0",
             "MooX::Aliases" : "0",
             "base" : "0",
             "overload" : "0",
-            "perl" : "5.010",
-            "strict" : "0",
-            "warnings" : "0"
+            "perl" : "5.010"
          }
       },
       "test" : {
          "requires" : {
-            "Clone" : "0",
-            "Data::Dumper::Concise" : "0",
             "ExtUtils::MakeMaker" : "0",
-            "File::Find" : "0",
+            "File::Spec" : "0",
             "File::Spec::Functions" : "0",
             "File::Temp" : "0",
+            "IO::Handle" : "0",
+            "IPC::Open3" : "0",
             "List::Util" : "0",
             "Test::More" : "0",
             "Test::Most" : "0",
-            "lib" : "0"
+            "lib" : "0",
+            "strict" : "0",
+            "warnings" : "0"
          }
       }
    },
    "provides" : {
       "Geo::UK::Postcode" : {
          "file" : "lib/Geo/UK/Postcode.pm",
-         "version" : "0.004"
-      },
-      "Geo::UK::Postcode::Regex" : {
-         "file" : "lib/Geo/UK/Postcode/Regex.pm",
-         "version" : "0.004"
+         "version" : "0.005"
       }
    },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/mjemmeson/geo-uk-postcode/issues"
+         "web" : "https://github.com/mjemmeson/Geo-UK-Postcode/issues"
       },
-      "homepage" : "https://metacpan.org/release/Geo-UK-Postcode",
+      "homepage" : "https://github.com/mjemmeson/Geo-UK-Postcode",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/mjemmeson/geo-uk-postcode.git",
-         "web" : "https://github.com/mjemmeson/geo-uk-postcode"
+         "url" : "https://github.com/mjemmeson/Geo-UK-Postcode.git",
+         "web" : "https://github.com/mjemmeson/Geo-UK-Postcode"
       }
    },
-   "version" : "0.004",
-   "x_contributors" : [
-      "Michael Jemmeson <michael.jemmeson@cpan.org>"
-   ]
+   "version" : "0.005",
+   "x_authority" : "cpan:DAGOLDEN"
 }
 

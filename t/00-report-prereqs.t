@@ -10,14 +10,14 @@ use File::Spec::Functions;
 use List::Util qw/max/;
 
 my @modules = qw(
-  Clone
-  Data::Dumper::Concise
   Exporter
   ExtUtils::MakeMaker
-  File::Find
-  File::ShareDir::Install
+  File::Spec
   File::Spec::Functions
   File::Temp
+  Geo::UK::Postcode::Regex
+  IO::Handle
+  IPC::Open3
   List::Util
   Moo
   MooX::Aliases

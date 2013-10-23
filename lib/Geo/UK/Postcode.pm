@@ -10,7 +10,7 @@ use overload '""' => "as_string";
 
 # ABSTRACT: Object and class methods for working with British postcodes.
 
-our $VERSION = '0.004'; # VERSION
+our $VERSION = '0.005'; # VERSION
 
 our @EXPORT_OK = qw/ pc_sort /;
 
@@ -123,9 +123,11 @@ Geo::UK::Postcode - Object and class methods for working with British postcodes.
 
 =head1 VERSION
 
-version 0.004
+version 0.005
 
 =head1 SYNOPSIS
+
+  # See Geo::UK::Postcode::Regex for parsing/matching postcodes
 
   use Geo::UK::Postcode;
   
@@ -161,13 +163,13 @@ version 0.004
 
 An object to represent a British postcode.
 
+For matching and parsing postcodes in a non-OO manner (for form validation, for
+example), see L<Geo::UK::Postcode::Regex>
+
 For geo-location (finding latitude and longitude) see L</"GEO-LOCATING POSTCODES">.
 
-For matching and parsing postcodes in a non-OO manner (for form
-validation, for example), see L<Geo::UK::Postcode::Regex>
-
-Currently undef development - feedback welcome. Basic API unlikely to change,
-just more features/more postcodes supported - see L</TODO> list.
+Currently undef development - feedback welcome. Basic API unlikely to change
+greatly, just more features/more postcodes supported - see L</TODO> list.
 
 =for Pod::Coverage BUILDARGS BUILD
 
@@ -175,7 +177,7 @@ just more features/more postcodes supported - see L</TODO> list.
 
 =head2 raw
 
-Returns exact string that object was constructed from.
+Returns exact string that the object was constructed from.
 
 =head2 as_string
 
@@ -258,6 +260,9 @@ receiving large amounts of post).
         ...
     }
 
+Returns true if postcode is mapped to a BFPO number (British Forces Post
+Office).
+
 =head2 posttowns
 
     my (@posttowns) = $postcode->posttowns;
@@ -335,7 +340,7 @@ L<Form::Validator::UKPostcode>
 =head2 Bugs / Feature Requests
 
 Please report any bugs or feature requests through the issue tracker
-at L<https://github.com/mjemmeson/geo-uk-postcode/issues>.
+at L<https://github.com/mjemmeson/Geo-UK-Postcode/issues>.
 You will be notified automatically of any progress on your issue.
 
 =head2 Source Code
@@ -343,17 +348,13 @@ You will be notified automatically of any progress on your issue.
 This is open source software.  The code repository is available for
 public review and contribution under the terms of the license.
 
-L<https://github.com/mjemmeson/geo-uk-postcode>
+L<https://github.com/mjemmeson/Geo-UK-Postcode>
 
-  git clone git://github.com/mjemmeson/geo-uk-postcode.git
+  git clone https://github.com/mjemmeson/Geo-UK-Postcode.git
 
 =head1 AUTHOR
 
 Michael Jemmeson <mjemmeson@cpan.org>
-
-=head1 CONTRIBUTOR
-
-Michael Jemmeson <michael.jemmeson@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

@@ -4,10 +4,8 @@ use warnings;
 
 use 5.010;
 
-use ExtUtils::MakeMaker 6.30;
+use ExtUtils::MakeMaker 6.17;
 
-use File::ShareDir::Install;
-install_share dist => "share";
 
 
 my %WriteMakefileArgs = (
@@ -15,8 +13,7 @@ my %WriteMakefileArgs = (
   "AUTHOR" => "Michael Jemmeson <mjemmeson\@cpan.org>",
   "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
-    "ExtUtils::MakeMaker" => "6.30",
-    "File::ShareDir::Install" => "0.03"
+    "ExtUtils::MakeMaker" => "6.17"
   },
   "DISTNAME" => "Geo-UK-Postcode",
   "EXE_FILES" => [],
@@ -24,26 +21,27 @@ my %WriteMakefileArgs = (
   "NAME" => "Geo::UK::Postcode",
   "PREREQ_PM" => {
     "Exporter" => 0,
+    "Geo::UK::Postcode::Regex" => 0,
     "Moo" => 0,
     "MooX::Aliases" => 0,
     "base" => 0,
-    "overload" => 0,
-    "strict" => 0,
-    "warnings" => 0
+    "overload" => 0
   },
   "TEST_REQUIRES" => {
-    "Clone" => 0,
-    "Data::Dumper::Concise" => 0,
     "ExtUtils::MakeMaker" => 0,
-    "File::Find" => 0,
+    "File::Spec" => 0,
     "File::Spec::Functions" => 0,
     "File::Temp" => 0,
+    "IO::Handle" => 0,
+    "IPC::Open3" => 0,
     "List::Util" => 0,
     "Test::More" => 0,
     "Test::Most" => 0,
-    "lib" => 0
+    "lib" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
-  "VERSION" => "0.004",
+  "VERSION" => "0.005",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -81,10 +79,5 @@ delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
 
 WriteMakefile(%WriteMakefileArgs);
 
-{
-package
-MY;
-use File::ShareDir::Install qw(postamble);
-}
 
 

@@ -3,9 +3,11 @@ NAME
     postcodes.
 
 VERSION
-    version 0.004
+    version 0.005
 
 SYNOPSIS
+      # See Geo::UK::Postcode::Regex for parsing/matching postcodes
+
       use Geo::UK::Postcode;
   
       my $pc = Geo::UK::Postcode->new( "wc1h9eb" );
@@ -39,18 +41,19 @@ SYNOPSIS
 DESCRIPTION
     An object to represent a British postcode.
 
-    For geo-location (finding latitude and longitude) see "GEO-LOCATING
-    POSTCODES".
-
     For matching and parsing postcodes in a non-OO manner (for form
     validation, for example), see Geo::UK::Postcode::Regex
 
+    For geo-location (finding latitude and longitude) see "GEO-LOCATING
+    POSTCODES".
+
     Currently undef development - feedback welcome. Basic API unlikely to
-    change, just more features/more postcodes supported - see "TODO" list.
+    change greatly, just more features/more postcodes supported - see "TODO"
+    list.
 
 METHODS
   raw
-    Returns exact string that object was constructed from.
+    Returns exact string that the object was constructed from.
 
   as_string
       $pc->as_string;
@@ -121,6 +124,9 @@ METHODS
             ...
         }
 
+    Returns true if postcode is mapped to a BFPO number (British Forces Post
+    Office).
+
   posttowns
         my (@posttowns) = $postcode->posttowns;
 
@@ -164,22 +170,19 @@ TODO
 SUPPORT
   Bugs / Feature Requests
     Please report any bugs or feature requests through the issue tracker at
-    <https://github.com/mjemmeson/geo-uk-postcode/issues>. You will be
+    <https://github.com/mjemmeson/Geo-UK-Postcode/issues>. You will be
     notified automatically of any progress on your issue.
 
   Source Code
     This is open source software. The code repository is available for
     public review and contribution under the terms of the license.
 
-    <https://github.com/mjemmeson/geo-uk-postcode>
+    <https://github.com/mjemmeson/Geo-UK-Postcode>
 
-      git clone git://github.com/mjemmeson/geo-uk-postcode.git
+      git clone https://github.com/mjemmeson/Geo-UK-Postcode.git
 
 AUTHOR
     Michael Jemmeson <mjemmeson@cpan.org>
-
-CONTRIBUTOR
-    Michael Jemmeson <michael.jemmeson@cpan.org>
 
 COPYRIGHT AND LICENSE
     This software is copyright (c) 2013 by Michael Jemmeson
