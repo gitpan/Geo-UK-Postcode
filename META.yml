@@ -4,11 +4,9 @@ author:
   - 'Michael Jemmeson <mjemmeson@cpan.org>'
 build_requires:
   ExtUtils::MakeMaker: 0
-  File::Spec: 0
+  File::Find: 0
   File::Spec::Functions: 0
   File::Temp: 0
-  IO::Handle: 0
-  IPC::Open3: 0
   List::Util: 0
   Test::More: 0
   Test::Most: 0
@@ -16,9 +14,9 @@ build_requires:
   strict: 0
   warnings: 0
 configure_requires:
-  ExtUtils::MakeMaker: 6.17
+  ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300039, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 5.006, CPAN::Meta::Converter version 2.132830'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -35,18 +33,17 @@ no_index:
 provides:
   Geo::UK::Postcode:
     file: lib/Geo/UK/Postcode.pm
-    version: 0.005
+    version: 0.006
 requires:
   Exporter: 0
-  Geo::UK::Postcode::Regex: 0
+  Geo::UK::Postcode::Regex: 0.005
   Moo: 0
   MooX::Aliases: 0
   base: 0
   overload: 0
   perl: 5.010
 resources:
-  bugtracker: https://github.com/mjemmeson/Geo-UK-Postcode/issues
-  homepage: https://github.com/mjemmeson/Geo-UK-Postcode
-  repository: https://github.com/mjemmeson/Geo-UK-Postcode.git
-version: 0.005
-x_authority: cpan:DAGOLDEN
+  bugtracker: https://github.com/mjemmeson/geo-uk-postcode/issues
+  homepage: https://metacpan.org/release/Geo-UK-Postcode
+  repository: git://github.com/mjemmeson/geo-uk-postcode.git
+version: 0.006

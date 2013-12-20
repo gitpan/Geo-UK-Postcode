@@ -12,12 +12,10 @@ use List::Util qw/max/;
 my @modules = qw(
   Exporter
   ExtUtils::MakeMaker
-  File::Spec
+  File::Find
   File::Spec::Functions
   File::Temp
   Geo::UK::Postcode::Regex
-  IO::Handle
-  IPC::Open3
   List::Util
   Moo
   MooX::Aliases

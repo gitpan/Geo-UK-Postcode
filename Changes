@@ -1,5 +1,9 @@
 Revision history for Geo-UK-Postcode
 
+0.006     2013-12-20 12:58:37 Europe/London
+
+  - Tidy, test tweaks, and added Geo::UK::Postcode::Regex 0.005 prereq
+
 0.005     2013-10-23 12:28:19 Europe/London
 
   - Split Geo::UK::Postcode::Regex into new package

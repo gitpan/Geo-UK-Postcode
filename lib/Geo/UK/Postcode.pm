@@ -10,7 +10,7 @@ use overload '""' => "as_string";
 
 # ABSTRACT: Object and class methods for working with British postcodes.
 
-our $VERSION = '0.005'; # VERSION
+our $VERSION = '0.006'; # VERSION
 
 our @EXPORT_OK = qw/ pc_sort /;
 
@@ -123,7 +123,7 @@ Geo::UK::Postcode - Object and class methods for working with British postcodes.
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
@@ -293,23 +293,15 @@ L<Geo::UK::Postcode::Manual::Geolocation>.
 
 =item *
 
+L<Geo::UK::Postcode::Regex>
+
+=item *
+
 L<Geo::Address::Mail::UK>
 
 =item *
 
 L<Geo::Postcode>
-
-=item *
-
-L<Data::Validation::Constraints::Postcode>
-
-=item *
-
-L<CGI::Untaint::uk_postcode>
-
-=item *
-
-L<Form::Validator::UKPostcode>
 
 =back
 
@@ -340,7 +332,7 @@ L<Form::Validator::UKPostcode>
 =head2 Bugs / Feature Requests
 
 Please report any bugs or feature requests through the issue tracker
-at L<https://github.com/mjemmeson/Geo-UK-Postcode/issues>.
+at L<https://github.com/mjemmeson/geo-uk-postcode/issues>.
 You will be notified automatically of any progress on your issue.
 
 =head2 Source Code
@@ -348,9 +340,9 @@ You will be notified automatically of any progress on your issue.
 This is open source software.  The code repository is available for
 public review and contribution under the terms of the license.
 
-L<https://github.com/mjemmeson/Geo-UK-Postcode>
+L<https://github.com/mjemmeson/geo-uk-postcode>
 
-  git clone https://github.com/mjemmeson/Geo-UK-Postcode.git
+  git clone git://github.com/mjemmeson/geo-uk-postcode.git
 
 =head1 AUTHOR
 
